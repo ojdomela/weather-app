@@ -1,7 +1,7 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import 'flag-icons'
 
-export default function Card({ city, removeCity }) {
+export default React.memo(function Card({ city, removeCity }) {
     const [data, setData] = useState({})
 
     const flagString = `fi fi-${city.info.country.toLowerCase()}`
@@ -22,4 +22,4 @@ export default function Card({ city, removeCity }) {
             <p>Card Content</p>
         </div>
     )
-}
+})
