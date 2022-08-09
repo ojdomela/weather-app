@@ -12,15 +12,13 @@ export default function Form({ addCity }) {
     }
 
     const filterForDuplicate = (data) => {
-        const filtered = data.reduce(
+        const filtered = Object.values(data.reduce(
             (filteredObject, currentItem) => {
                 const code = currentItem.country + currentItem.state + currentItem.name
-                if (filteredObject.some(
-                    (item) => item.name === currentItem.name && item.state === currentItem.state && item.country === currentItem.country
-                )) return filteredObject
-                return [...filteredObject, currentItem]
-            }, {}
-        )
+                if (!filteredObject[code]) filteredObject[code] = currentItem
+                return filteredObject
+            }, {}))
+        console.log(filtered)
         return filtered
     }
 
@@ -33,7 +31,8 @@ export default function Form({ addCity }) {
             })
             .then(data => {
                 setError(false)
-                setResponse(filterForDuplicate(data))
+                filterForDuplicate(data)
+                setResponse(data)
             })
             .catch(err => {
                 setError(err.message)
