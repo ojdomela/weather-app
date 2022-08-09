@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { v4 as uuidv4 } from 'uuid';
-import Card from './components/Card'
-import Form from './components/Form'
+import Card from './components/cards/Card'
+import Form from './components/input/Form'
 import GlobalStyle from './styles'
 
 
@@ -10,11 +10,11 @@ function App() {
 
   const addCity = (city) => {
     setCities([...cities, {
-      data: city,
+      info: city,
       id: uuidv4()
     }])
   }
-
+  
   const removeCity = (id) => {
     setCities(cities.filter(city => city.id !== id))
   }

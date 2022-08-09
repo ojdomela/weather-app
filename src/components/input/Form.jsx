@@ -18,7 +18,6 @@ export default function Form({ addCity }) {
                 if (!filteredObject[code]) filteredObject[code] = currentItem
                 return filteredObject
             }, {}))
-        console.log(filtered)
         return filtered
     }
 
@@ -31,15 +30,15 @@ export default function Form({ addCity }) {
             })
             .then(data => {
                 setError(false)
-                filterForDuplicate(data)
-                setResponse(data)
+                setResponse(filterForDuplicate(data))
             })
             .catch(err => {
                 setError(err.message)
             })
     }
+    
     return (
-        <>
+        <div>
             <form onSubmit={handleSubmit}>
                 <input value={input} onChange={(e) => setInput(e.target.value)} />
                 <button type="submit">Submit</button>
@@ -48,6 +47,6 @@ export default function Form({ addCity }) {
             {response.length > 1 && <div>
                 {response.map((city, index) => <Suggestion selectSuggestion={selectSuggestion} key={index} city={city} />)}
             </div>}
-        </>
+        </div>
     )
 }
