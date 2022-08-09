@@ -9,14 +9,14 @@ function App() {
   const [cities, setCities] = useState([])
 
   const addCity = useCallback((city) => {
-    setCities([...cities, {
+    setCities(cities => [...cities, {
       info: city,
       id: uuidv4()
     }])
   }, [])
 
   const removeCity = useCallback((id) => {
-    setCities(cities.filter(city => city.id !== id))
+    setCities(cities => cities.filter(city => city.id !== id))
   }, [])
 
   return (
