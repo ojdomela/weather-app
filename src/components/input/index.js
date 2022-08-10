@@ -1,7 +1,8 @@
 import { useState } from 'react'
 import Suggestion from './Suggestion'
+import { Container, Wrapper, Form } from './styles'
 
-export default function Form({ addCity }) {
+export default function Input({ addCity }) {
     const [response, setResponse] = useState([])
     const [error, setError] = useState(false)
     const [input, setInput] = useState('')
@@ -36,17 +37,17 @@ export default function Form({ addCity }) {
                 setError(err.message)
             })
     }
-    
+
     return (
-        <div>
-            <form onSubmit={handleSubmit}>
+        <Container>
+            <Form onSubmit={handleSubmit}>
                 <input value={input} onChange={(e) => setInput(e.target.value)} />
                 <button type="submit">Submit</button>
-            </form>
+            </Form>
             {error && <p>Couldn't find {error}!</p>}
-            {response.length > 1 && <div>
-                {response.map((city, index) => <Suggestion selectSuggestion={selectSuggestion} key={index} city={city} />)}
-            </div>}
-        </div>
+            <Wrapper>
+                {response.length > 1 && response.map((city, index) => <Suggestion selectSuggestion={selectSuggestion} key={index} city={city} />)}
+            </Wrapper>
+        </Container>
     )
 }

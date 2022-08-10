@@ -1,8 +1,9 @@
 import { useState, useCallback } from 'react'
 import { v4 as uuidv4 } from 'uuid';
-import Card from './components/cards/Card'
-import Form from './components/input/Form'
+import Card from './components/card'
+import Input from './components/input'
 import GlobalStyle from './styles'
+import styled from 'styled-components';
 
 
 function App() {
@@ -22,12 +23,19 @@ function App() {
   return (
     <>
       <GlobalStyle />
-      <Form addCity={addCity} />
-      {cities.length > 0 && <div>
+      <Input addCity={addCity} />
+      <Container>
         {cities.map(city => <Card removeCity={removeCity} key={city.id} city={city} />)}
-      </div>}
+      </Container>
     </>
   );
 }
+
+const Container = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+`
 
 export default App;

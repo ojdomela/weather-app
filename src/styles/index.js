@@ -1,10 +1,9 @@
 import { createGlobalStyle } from "styled-components";
 
 export const globals = {
-    primaryColor: "#00aaff",
-    secondaryColor: "#ff00aa",
-    tertiaryColor: "#00ffaa",
-    backgroundColor: "#fafafa",
+    primaryColor: "rgb(0, 50, 150)",
+    secondaryColor: "#fff",
+    tertiaryColor: "rgb(255, 200, 0)"
 }
 
 
@@ -15,6 +14,9 @@ export default createGlobalStyle`
 
     html {
         font-size: 62.5%;
+        @media (max-width: 768px) {
+            font-size: 50%;
+        }
     }
 
     body {
@@ -25,8 +27,7 @@ export default createGlobalStyle`
         display: flex;
         flex-direction: column;
         align-items: center;
-        justify-content: center;
         min-height: 100vh;
-        background-color: ${globals.backgroundColor};
+        background-color: ${globals.secondaryColor};
     }
 `
