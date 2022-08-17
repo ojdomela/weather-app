@@ -18,7 +18,7 @@ const Wrapper = styled.button`
   border-radius: 3rem;
   border: 2px solid ${globals.tertiaryColor};
   background-color: ${globals.secondaryColor};
-  padding: 0.5rem;
+  padding: 0.5rem 1.5rem;
   margin: 1rem;
   cursor: pointer;
 `;
@@ -26,5 +26,6 @@ const Wrapper = styled.button`
 const Text = styled.p`
   font-size: 1.5rem;
   font-weight: bold;
+  margin: 0;
   color: ${globals.primaryColor};
 `;
