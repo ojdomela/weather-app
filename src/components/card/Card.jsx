@@ -19,19 +19,21 @@ export default React.memo(function Card({ city, removeCity }) {
 
     return (
         <Container>
-            <Wrapper justifyContent="space-between">
-                <Title><span className={flagString}></span></Title>
-                <Button onClick={() => removeCity(city.id)}>X</Button>
+            <Wrapper flexDirection="column">
+                <Wrapper>
+                    <Title><span className={flagString}></span></Title>
+                    <CloseBtn onClick={() => removeCity(city.id)}>X</CloseBtn>
+                </Wrapper>
+                <CardTitle margin="1rem 0" name={city.info.name} state={city.info.state} />
             </Wrapper>
-            <CardTitle margin="1rem 0" name={city.info.name} state={city.info.state} />
             {data && flipped && <CardBack data={data.daily} />}
             {data && !flipped && <CardFront data={data} />}
-            <button onClick={() => setFlipped(flipped => !flipped)}>Show 7-days</button>
+            <SwapBtn onClick={() => setFlipped(flipped => !flipped)}>Show {flipped ? 'Today' : 'Forecast'}</SwapBtn>
         </Container>
     )
 })
 
-const CardTitle = ({name, state}) => {
+const CardTitle = ({ name, state }) => {
     if (!state) return <Title margin="1rem 0">{name}</Title>
 
     return (
@@ -46,15 +48,17 @@ const Container = styled.div`
     margin: 1.5rem;
     padding: 1.5rem;
     border-radius: 0.5rem;
+    height: 65rem;
     min-width: 25rem;
     max-width: 35rem;
     border: 2px solid ${globals.primaryColor};
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
     align-items: center;
 `
 
-const Button = styled.button`
+const CloseBtn = styled.button`
     align-self: flex-start;
     border: none;
     height: 2.5rem;
@@ -65,8 +69,21 @@ const Button = styled.button`
     justify-content: center;
     align-items: center;
     text-align: center;
+    border: thin solid ${globals.primaryColor};
     background-color: ${globals.tertiaryColor};
 `
+
+const SwapBtn = styled.button`
+    align-self: flex-end;
+    border: thin solid ${globals.primaryColor};
+    padding: 0.5rem 1rem;
+    border-radius: 1.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background-color: ${globals.tertiaryColor};
+`;
 
 const Title = styled.h2`
     font-size: 2.5rem;
@@ -74,7 +91,7 @@ const Title = styled.h2`
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    @media (max-width: 768px) {
+    @media (max-width: 420px) {
         font-size: 1.8rem;
     }
 `
@@ -84,4 +101,5 @@ const Wrapper = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
+    flex-direction: ${props => props.flexDirection || 'row'};
 `

@@ -1,9 +1,9 @@
 import { createGlobalStyle } from "styled-components";
 
 export const globals = {
-    primaryColor: "rgb(0, 50, 150)",
+    primaryColor: "#01ad01",
     secondaryColor: "#fff",
-    tertiaryColor: "rgb(255, 200, 0)"
+    tertiaryColor: "#e2eff8"
 }
 
 

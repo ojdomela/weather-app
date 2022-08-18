@@ -9,7 +9,7 @@ export default function CardFront({ data }) {
     <Wrapper flexDirection="column">
       <Text>{format(date, 'EEEE, do') + ' of ' + format(date, 'MMMM')}</Text>
         <img src={`https://openweathermap.org/img/wn/${data.current.weather[0].icon}@4x.png`} alt="icon" />
-        <Text>Currently {Math.round(data.current.temp)}°</Text>
+        <Text>{Math.round(data.current.temp)}°</Text>
         <Wrapper>
           <img src={`https://openweathermap.org/img/wn/09d.png`} alt="icon" />
           <Text>{Math.round(data.daily[0].pop * 100)}%</Text>
@@ -30,7 +30,8 @@ const Wrapper = styled.div`
 const Text = styled.p`
     margin: 0;
     font-size: 1.8rem;
-    @media (max-width: 768px) {
+    font-weight: bold;
+    @media (max-width: 420px) {
         font-size: 1.4rem;
     }
 `

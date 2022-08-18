@@ -16,7 +16,7 @@ export default function Suggestion({ selectSuggestion, city }) {
 
 const Wrapper = styled.button`
   border-radius: 3rem;
-  border: 2px solid ${globals.tertiaryColor};
+  border: 2px solid #000;
   background-color: ${globals.secondaryColor};
   padding: 0.5rem 1.5rem;
   margin: 1rem;
@@ -27,5 +27,5 @@ const Text = styled.p`
   font-size: 1.5rem;
   font-weight: bold;
   margin: 0;
-  color: ${globals.primaryColor};
+  color: #000;
 `;
