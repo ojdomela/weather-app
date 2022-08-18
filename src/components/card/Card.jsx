@@ -47,7 +47,7 @@ const Container = styled.div`
     flex: 1;
     margin: 1.5rem;
     padding: 1.5rem;
-    border-radius: 0.5rem;
+    border-radius: 2.5rem;
     height: 65rem;
     min-width: 25rem;
     max-width: 35rem;
