@@ -25,7 +25,7 @@ export default function Input({ addCity }) {
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        fetch(`http://api.openweathermap.org/geo/1.0/direct?q=${input}&limit=5&appid=${process.env.REACT_APP_API_KEY}`)
+        fetch(`https://api.openweathermap.org/geo/1.0/direct?q=${input}&limit=5&appid=${process.env.REACT_APP_API_KEY}`)
             .then(res => {
                 if (res.ok) return res.json()
                 throw new Error(input)
