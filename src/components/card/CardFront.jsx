@@ -8,7 +8,8 @@ export default function CardFront({ data }) {
   const date = new Date(data.current.dt * 1000)
   return (
     <Container flexDirection="column">
-      <Text>{format(date, 'EEEE, do') + ' of ' + format(date, 'MMMM')}</Text>
+      <Text>Current Weather</Text>
+      <Description>Updated {format(date, 'p')}</Description>
       <img src={`https://openweathermap.org/img/wn/${data.current.weather[0].icon}@4x.png`} alt="icon" />
       <Text>{Math.round(data.current.temp)}°</Text>
       <Wrapper>
@@ -24,11 +25,13 @@ const Container = styled.div`
     width: 100%;
     display: flex;
     justify-content: center;
+    margin: 1.5rem 0;
     align-items: center;
     flex-direction: column;
-    height: 45rem;
+    height: 40rem;
     border: thin solid ${globals.primaryColor};
     background-color: ${globals.tertiaryColor};
+    border-radius: 1.5rem;
 `
 
 const Wrapper = styled.div`
@@ -44,5 +47,13 @@ const Text = styled.p`
     font-weight: bold;
     @media (max-width: 420px) {
         font-size: 1.4rem;
+    }
+`
+
+const Description = styled.p`
+    margin: 0.5rem;
+    font-size: 1.4rem;
+    @media (max-width: 420px) {
+        font-size: 1rem;
     }
 `

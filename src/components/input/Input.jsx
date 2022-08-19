@@ -33,7 +33,7 @@ export default function Input({ addCity }) {
             .then(data => {
                 setError(false)
                 const filtered = filterForDuplicate(data)
-                if(filtered.length > 0) {
+                if(filtered.length > 1) {
                     setSuggestions(filtered)
                     setError(false)
                     return

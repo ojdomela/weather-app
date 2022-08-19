@@ -6,7 +6,7 @@ import { globals } from '../../styles'
 import { format } from 'date-fns'
 
 export default function CardBack({ data }) {
-  const [active, setActive] = useState(0)
+  const [active, setActive] = useState(1)
 
   const handleToggle = (index) => {
     index === active ? setActive(null) : setActive(index)
@@ -14,19 +14,34 @@ export default function CardBack({ data }) {
 
   return (
     <Container>
-      {data.map((day, index) => <Day day={day} key={index} active={active === index} handleToggle={() => handleToggle(index)} />)}
+      {data.daily.map((day, index) => {
+        if (index === 0) return null
+        return <Day day={day} key={index} active={active === index} handleToggle={() => handleToggle(index)} />
+      })}
     </Container>
   )
 }
 
 const Day = ({ day, active, handleToggle }) => {
+
+
   const date = new Date(day.dt * 1000)
-  console.log(format(date, 'EEEE, do') + ' of ' + format(date, 'MMMM'))
+
+  console.log(date.getTimezoneOffset())
+
+
+
+
+  console.log(format(date, 'E') + ' of ' + format(date, 'MMMM'))
+
+
+
+
   return (
     <Accordion active={active} onClick={handleToggle} >
       <Wrapper active={active}>
-        <Text>Date</Text>
-        <Text>{Math.round(day.temp.max)}° / {Math.round(day.temp.min)}°</Text>
+        <Text width="9rem">{format(date, 'EEEE')}</Text>
+        <Text width="8rem">{Math.round(day.temp.max)}° / {Math.round(day.temp.min)}°</Text>
         <Text active={active}>▲</Text>
       </Wrapper>
       <AccordionItem active={active}>
@@ -45,11 +60,14 @@ const Day = ({ day, active, handleToggle }) => {
 const Container = styled.div`
     display: flex;
     width: 100%;
-    height: 45rem;
+    height: 40rem;
+    margin: 1.5rem 0;
     flex-direction: column;
     align-items: center;
     border: thin solid ${globals.primaryColor};
     background-color: ${globals.tertiaryColor};
+    border-radius: 1.5rem;
+    overflow: hidden;
 `
 
 const Accordion = styled.div`
@@ -75,6 +93,7 @@ const Wrapper = styled.div`
 `
 
 const Text = styled.p`
+    ${props => props.width ? `width: ${props.width};` : ''}
     font-size: 1.8rem;
     margin: 0;
     font-weight: bold;

@@ -26,15 +26,17 @@ export default React.memo(function Card({ city, removeCity }) {
                 </Wrapper>
                 <CardTitle margin="1rem 0" name={city.info.name} state={city.info.state} />
             </Wrapper>
-            {data && flipped && <CardBack data={data.daily} />}
-            {data && !flipped && <CardFront data={data} />}
-            <SwapBtn onClick={() => setFlipped(flipped => !flipped)}>Show {flipped ? 'Today' : 'Forecast'}</SwapBtn>
+            <Wrapper flexDirection="column">
+                {data && flipped && <CardBack data={data} />}
+                {data && !flipped && <CardFront data={data} />}
+                <SwapBtn onClick={() => setFlipped(flipped => !flipped)}>Show {flipped ? 'Today' : 'Forecast'}</SwapBtn>
+            </Wrapper>
         </Container>
     )
 })
 
 const CardTitle = ({ name, state }) => {
-    if (!state) return <Title margin="1rem 0">{name}</Title>
+    if (!state) return <Title margin="2.5rem 0">{name}</Title>
 
     return (
         <Title margin="1rem 0">
@@ -48,14 +50,17 @@ const Container = styled.div`
     margin: 1.5rem;
     padding: 1.5rem;
     border-radius: 2.5rem;
-    height: 65rem;
-    min-width: 25rem;
+    height: 60rem;
+    min-width: 28rem;
     max-width: 35rem;
     border: 2px solid ${globals.primaryColor};
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
+    @media (max-width: 420px) {
+        min-width: 25rem;
+    }
 `
 
 const CloseBtn = styled.button`
@@ -89,8 +94,9 @@ const Title = styled.h2`
     font-size: 2.5rem;
     margin: ${props => props.margin || '0'};
     display: flex;
-    flex-wrap: wrap;
+    flex-direction: column;
     justify-content: center;
+    align-items: center;
     @media (max-width: 420px) {
         font-size: 1.8rem;
     }
