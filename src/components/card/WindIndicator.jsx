@@ -57,7 +57,6 @@ const Icon = styled.img`
     color: grey;
 `
 
-
 const calcWindSpeed = (speed) => {
     if (speed < 0.6) return 0
     if (speed < 1.6) return 1
