@@ -53,7 +53,7 @@ const SpeedText = styled.p`
 const Icon = styled.img`
     width: 100%;
     height: 100%;
-    transform: rotate(${props => props.rotate}deg);
+    transform: rotate(${props => props.rotate - 180}deg);
     color: grey;
 `
 
