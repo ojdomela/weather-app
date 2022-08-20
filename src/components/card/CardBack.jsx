@@ -11,36 +11,29 @@ export default function CardBack({ data }) {
   const handleToggle = (index) => {
     index === active ? setActive(null) : setActive(index)
   }
-
+  
   return (
     <Container>
       {data.daily.map((day, index) => {
         if (index === 0) return null
-        return <Day day={day} key={index} active={active === index} handleToggle={() => handleToggle(index)} />
+        return <Day day={day} key={index} active={active === index} handleToggle={() => handleToggle(index)} offset={data.timezone_offset}/>
       })}
     </Container>
   )
 }
 
-const Day = ({ day, active, handleToggle }) => {
+const Day = ({ day, active, handleToggle, offset }) => {
 
 
   const date = new Date(day.dt * 1000)
-
-  console.log(date.getTimezoneOffset())
-
-
-
-
-  console.log(format(date, 'E') + ' of ' + format(date, 'MMMM'))
-
+  const localDate = new Date((day.dt + (date.getTimezoneOffset() * 60) + offset) * 1000)
 
 
 
   return (
     <Accordion active={active} onClick={handleToggle} >
       <Wrapper active={active}>
-        <Text width="9rem">{format(date, 'EEEE')}</Text>
+        <Text width="9rem">{format(localDate, 'EEEE')}</Text>
         <Text width="8rem">{Math.round(day.temp.max)}° / {Math.round(day.temp.min)}°</Text>
         <Text active={active}>▲</Text>
       </Wrapper>

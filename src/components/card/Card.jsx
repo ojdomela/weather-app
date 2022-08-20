@@ -16,19 +16,19 @@ export default React.memo(function Card({ city, removeCity }) {
             .then(res => res.json())
             .then(data => setData(data))
     }, [])
-
+    
     return (
         <Container>
             <Wrapper flexDirection="column">
                 <Wrapper>
-                    <Title><span className={flagString}></span></Title>
+                    <Title><Flag className={flagString} /></Title>
                     <CloseBtn onClick={() => removeCity(city.id)}>X</CloseBtn>
                 </Wrapper>
                 <CardTitle margin="1rem 0" name={city.info.name} state={city.info.state} />
             </Wrapper>
             <Wrapper flexDirection="column">
                 {data && flipped && <CardBack data={data} />}
-                {data && !flipped && <CardFront data={data} />}
+                {data && !flipped && <CardFront data={data} title={city.info.name}/>}
                 <SwapBtn onClick={() => setFlipped(flipped => !flipped)}>Show {flipped ? 'Today' : 'Forecast'}</SwapBtn>
             </Wrapper>
         </Container>
@@ -44,6 +44,10 @@ const CardTitle = ({ name, state }) => {
         </Title>
     )
 }
+
+const Flag = styled.span`
+    outline: 1px solid ${globals.primaryColor};
+`
 
 const Container = styled.div`
     flex: 1;

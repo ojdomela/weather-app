@@ -4,12 +4,14 @@ import WindIndicator from './WindIndicator'
 import styled from 'styled-components'
 import { globals } from '../../styles'
 
-export default function CardFront({ data }) {
+export default function CardFront({ data, title }) {
   const date = new Date(data.current.dt * 1000)
+  const localDate = new Date((data.current.dt + (date.getTimezoneOffset() * 60) + data.timezone_offset) * 1000)
+
   return (
     <Container flexDirection="column">
-      <Text>Current Weather</Text>
-      <Description>Updated {format(date, 'p')}</Description>
+      <Text>Updated {format(date, 'p')}</Text>
+      <Description>{title} time: {format(localDate, 'p')}</Description>
       <img src={`https://openweathermap.org/img/wn/${data.current.weather[0].icon}@4x.png`} alt="icon" />
       <Text>{Math.round(data.current.temp)}°</Text>
       <Wrapper>
